@@ -2,7 +2,7 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{difference_dist}
 \alias{difference_dist}
-\title{Given dist1 and dist2, find the pdf of dist1 - dist2}
+\title{Find density of the difference of two distributions}
 \usage{
 difference_dist(dist1, dist2)
 }
@@ -13,12 +13,16 @@ difference_dist(dist1, dist2)
 A probability density function defined on \code{[-1, 1]}.
 }
 \description{
+Given two probability density functions \code{dist1} and \code{dist2}, \code{difference_dist}
+returns the density of ``dist1 - dist2`.
+}
+\details{
 At the moment this only works when dist1 and dist2 are defined on \code{[0, 1]}.
 }
 \examples{
 
 d1 <- update_prior(30, 50, P = 0.5, prior = stats::dunif)
-d2 <- update_prior(25, 40, P = 0.5, prior = stats::dunif)
+d2 <- update_prior(32, 40, P = 0.5, prior = stats::dunif)
 dd <- difference_dist(d1, d2)
-
+dist_hdr(dd, 0.95)
 }

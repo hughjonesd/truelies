@@ -2,8 +2,7 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{update_prior}
 \alias{update_prior}
-\title{Calculate posterior distribution of the proportion of liars, given
-experimental data}
+\title{Calculate posterior distribution of the proportion of liars}
 \usage{
 update_prior(heads, N, P, prior, npoints = 1000)
 }

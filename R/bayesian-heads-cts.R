@@ -85,7 +85,16 @@ update_prior <- function(heads, N, P, prior, npoints = 1e3) {
 
 
 
-#' Estimate probability that two samples s1, s2 from 2 independent distributions have s1 > s2
+#' Calculate probability that one posterior is larger than another
+#'
+#' @description
+#' Given two distributions with density functions \eqn{\phi_1, \phi_2},
+#' this calculates:
+#'
+#' \deqn{
+#' \int_0^1 \int_0^{l_1}\phi_1(l_1) \phi_2(l_2) d l_2 d l_1,
+#' }
+#' the probability that the value of the first distribution is greater.
 #'
 #' @param dist1 Density of distribution 1, as a one-argument function.
 #' @param dist2 Density of distribution 2.
@@ -110,7 +119,10 @@ compare_dists <- function (dist1, dist2) {
 }
 
 
-#' Given dist1 and dist2, find the pdf of dist1 - dist2
+#' Find density of the difference of two distributions
+#'
+#' Given two probability density functions `dist1` and `dist2`, `difference_dist`
+#'  returns the density of ``dist1 - dist2`.
 #'
 #' At the moment this only works when dist1 and dist2 are defined on `[0, 1]`.
 #'
@@ -168,7 +180,7 @@ dist_mean <- function (dist, l = attr(dist, "limits")[1], r = attr(dist, "limits
   return(EV)
 }
 
-#' Find probability of a probability distribution function within given bounds
+#' Find probability of a probability density function within given bounds
 #'
 #' @inherit dist_mean params
 #'
@@ -188,7 +200,7 @@ dist_prob_within <- function (dist, l, r) {
 }
 
 
-#' Find quantiles given a probability distribution function
+#' Find quantiles given a probability density function
 #'
 #' @param dist A one argument function
 #' @param probs A vector of probabilities
@@ -216,7 +228,7 @@ dist_quantile <- function(dist, probs, bounds = attr(dist, "limits")) {
 }
 
 
-#' Compute highest density region for a given confidence level
+#' Compute highest density region for a density function
 #'
 #' This is a wrapper for `hdrcde::hdr`. The highest density region is the
 #' interval that covers `conf_level` of the data and has the highest
@@ -293,6 +305,52 @@ power_calc <- function (N, P, lambda, alpha = 0.05, prior = stats::dunif,
   })
 
   mean(res)
+}
+
+
+#' Estimate power to detect differences in lying between two samples
+#'
+#' Using simulations, estimate power to detect differences in lying
+#' using [compare_dists()], given values for \eqn{\lambda}, the
+#' probability of lying, in each sample.
+#'
+#' @param N1 N of sample 1
+#' @param N2 N of sample 2
+#' @inherit basic_params params
+#' @param lambda1 Probability of lying in sample 1
+#' @param lambda2 Probability of lying in sample 2
+#' @param alpha Significance level
+#' @param alternative "two.sided", "greater" (sample 1 is greater), or "less". Can be
+#'   abbreviated
+#' @param nsims Number of simulations to run
+#'
+#' @return Estimated power, a scalar between 0 and 1.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' power_calc_difference(N1 = 100, P = 0.5, lambda = 0, lambda2 = 0.25)
+#'
+power_calc_difference <- function(N1, N2 = N1, P, lambda1, lambda2, alpha = 0.05,
+      alternative = c("two.sided", "greater", "less"),
+      prior = stats::dunif, nsims = 200) {
+  alternative <- match.arg(alternative)
+
+  res <- replicate(nsims, {
+    R1 <- stats::rbinom(1, N1, (1-P) + P * lambda1)
+    R2 <- stats::rbinom(1, N2, (1-P) + P * lambda2)
+    pstr1 <- update_prior(R1, N1, P, prior)
+    pstr2 <- update_prior(R2, N2, P, prior)
+    p1x <- compare_dists(pstr1, pstr2)
+    p1x
+  })
+
+  switch(alternative,
+          greater = mean(res <= alpha),
+          less    = mean(res >= 1 - alpha),
+          two.sided = mean(res <= alpha/2 | res >= 1 - alpha/2)
+        )
 }
 
 is_prob <- function (p) all(p >= 0 & p <= 1)

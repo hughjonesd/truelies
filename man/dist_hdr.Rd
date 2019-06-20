@@ -2,7 +2,7 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{dist_hdr}
 \alias{dist_hdr}
-\title{Compute highest density region for a given confidence level}
+\title{Compute highest density region for a density function}
 \usage{
 dist_hdr(dist, conf_level, bounds = attr(dist, "limits"))
 }

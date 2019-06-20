@@ -41,4 +41,3 @@ dist_mean(d1)
 # 95% confidence interval, using hdrcde
 dist_hdr(d1, 0.95)
 ```
-

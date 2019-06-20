@@ -2,7 +2,7 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{compare_dists}
 \alias{compare_dists}
-\title{Estimate probability that two samples s1, s2 from 2 independent distributions have s1 > s2}
+\title{Calculate probability that one posterior is larger than another}
 \usage{
 compare_dists(dist1, dist2)
 }
@@ -15,7 +15,13 @@ compare_dists(dist1, dist2)
 A probability scalar.
 }
 \description{
-Estimate probability that two samples s1, s2 from 2 independent distributions have s1 > s2
+Given two distributions with density functions \eqn{\phi_1, \phi_2},
+this calculates:
+
+\deqn{
+\int_0^1 \int_0^{l_1}\phi_1(l_1) \phi_2(l_2) d l_2 d l_1,
+}
+the probability that the value of the first distribution is greater.
 }
 \examples{
 

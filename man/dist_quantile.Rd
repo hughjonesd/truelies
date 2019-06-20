@@ -2,7 +2,7 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{dist_quantile}
 \alias{dist_quantile}
-\title{Find quantiles given a probability distribution function}
+\title{Find quantiles given a probability density function}
 \usage{
 dist_quantile(dist, probs, bounds = attr(dist, "limits"))
 }
@@ -17,7 +17,7 @@ dist_quantile(dist, probs, bounds = attr(dist, "limits"))
 A vector of quantiles
 }
 \description{
-Find quantiles given a probability distribution function
+Find quantiles given a probability density function
 }
 \examples{
 
