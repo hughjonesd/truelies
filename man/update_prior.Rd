@@ -2,8 +2,8 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{update_prior}
 \alias{update_prior}
-\title{Calculate posterior of lambdas given prior, and heads reports of good
-outcome}
+\title{Calculate posterior distribution of the proportion of liars, given
+experimental data}
 \usage{
 update_prior(heads, N, P, prior, npoints = 1000)
 }
@@ -24,8 +24,20 @@ The probability density of the posterior distribution, as a one-argument
 function.
 }
 \description{
-Calculate posterior of lambdas given prior, and heads reports of good
-outcome
+\code{update_prior} uses the equation for the posterior:
+
+\deqn{
+  \phi(\lambda | R; N,P) = Pr(R|\lambda; N,P) \phi(\lambda) /
+    \int Pr(R | \lambda'; N,P) \phi(\lambda') d \lambda'
+}
+
+where \eqn{\phi} is the prior and \eqn{Pr(R | \lambda; N, P)} is the
+probability of R reports of heads given that people lie with probability
+\eqn{\lambda}:
+
+\deqn{
+  Pr(R | \lambda; N, P) = binom(N, (1-P) + \lambda P)
+}
 }
 \examples{
 posterior <- update_prior(heads = 30, N = 50, P = 0.5, prior = stats::dunif)

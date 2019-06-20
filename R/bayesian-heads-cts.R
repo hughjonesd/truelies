@@ -38,8 +38,23 @@ try_integral <- function(f, a, b, npoints = 100) {
   return(integ$value)
 }
 
-#' Calculate posterior of lambdas given prior, and heads reports of good
-#' outcome
+#' Calculate posterior distribution of the proportion of liars
+#'
+#' @description
+#' `update_prior` uses the equation for the posterior:
+#'
+#' \deqn{
+#'   \phi(\lambda | R; N,P) = Pr(R|\lambda; N,P) \phi(\lambda) /
+#'     \int Pr(R | \lambda'; N,P) \phi(\lambda') d \lambda'
+#' }
+#'
+#' where \eqn{\phi} is the prior and \eqn{Pr(R | \lambda; N, P)} is the
+#' probability of R reports of heads given that people lie with probability
+#' \eqn{\lambda}:
+#'
+#' \deqn{
+#'   Pr(R | \lambda; N, P) = binom(N, (1-P) + \lambda P)
+#' }
 #'
 #' @inherit basic_params params
 #' @param npoints How many points to integrate on?
@@ -106,9 +121,9 @@ compare_dists <- function (dist1, dist2) {
 #' @examples
 #'
 #' d1 <- update_prior(30, 50, P = 0.5, prior = stats::dunif)
-#' d2 <- update_prior(25, 40, P = 0.5, prior = stats::dunif)
+#' d2 <- update_prior(32, 40, P = 0.5, prior = stats::dunif)
 #' dd <- difference_dist(d1, d2)
-#'
+#' dist_hdr(dd, 0.95)
 #' @export
 difference_dist <- function (dist1, dist2) {
 
@@ -130,11 +145,11 @@ difference_dist <- function (dist1, dist2) {
 }
 
 
-#' Find mean of a probability distribution function
+#' Find mean of a probability density function
 #'
-#' @param dist A one-argument function
-#' @param l Minimum value
-#' @param r Maximum value
+#' @param dist A one-argument function returned from [update_prior()]
+#' @param l Lower bound of the density's support
+#' @param r Upper bound of the density's support
 #'
 #' @return A scalar
 #'
@@ -144,7 +159,7 @@ difference_dist <- function (dist1, dist2) {
 #' dist_mean(d1)
 #'
 #' @export
-dist_mean <- function (dist, l = 0, r = 1) {
+dist_mean <- function (dist, l = attr(dist, "limits")[1], r = attr(dist, "limits")[2]) {
   stopifnot(is.function(dist))
 
   f <- function (x) x * dist(x)
@@ -187,7 +202,7 @@ dist_prob_within <- function (dist, l, r) {
 #' dist_quantile(d1, c(0.025, 0.975))
 #'
 #' @export
-dist_quantile <- function(dist, probs, bounds = c(0, 1)) {
+dist_quantile <- function(dist, probs, bounds = attr(dist, "limits")) {
   stopifnot(is_prob(probs), is.function(dist))
 
   qs <- sapply(probs, function (prob) {
@@ -223,7 +238,7 @@ dist_quantile <- function(dist, probs, bounds = c(0, 1)) {
 #' dist_hdr(d1, 0.95)
 #'
 #' @export
-dist_hdr <- function (dist, conf_level, bounds = c(0, 1)) {
+dist_hdr <- function (dist, conf_level, bounds = attr(dist, "limits")) {
   stopifnot(is_prob(conf_level), is.function(dist))
 
   eval_at <- seq(bounds[1], bounds[2], 0.01)
@@ -314,20 +329,3 @@ plot.densityFunction <- function (x, ...) {
   # ... goes first so we can override xlim or ylab
   NextMethod(..., xlim = attr(x, "limits"), ylab = "Density")
 }
-
-if (FALSE) {
-  N <- 100
-  P <- 0.5
-  prior <- stats::dunif
-  CI <- 0.95
-  cov_check <- replicate(1000, {
-    lambda <- runif(1)
-    heads <- rbinom(1, N, prob = lambda * P + 1 - P)
-    posterior <- update_prior(heads, N, P, prior)
-    cis <- dist_quantiles(posterior, c(1/2 - CI/2, 1/2 + CI/2))
-
-    cis[1] <= lambda && lambda <= cis[2]
-  })
-  table(cov_check)
-}
-

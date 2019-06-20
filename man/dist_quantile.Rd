@@ -4,7 +4,7 @@
 \alias{dist_quantile}
 \title{Find quantiles given a probability distribution function}
 \usage{
-dist_quantile(dist, probs, bounds = c(0, 1))
+dist_quantile(dist, probs, bounds = attr(dist, "limits"))
 }
 \arguments{
 \item{dist}{A one argument function}

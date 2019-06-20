@@ -4,7 +4,7 @@
 \alias{dist_hdr}
 \title{Compute highest density region for a given confidence level}
 \usage{
-dist_hdr(dist, conf_level, bounds = c(0, 1))
+dist_hdr(dist, conf_level, bounds = attr(dist, "limits"))
 }
 \arguments{
 \item{dist}{A one-argument function}

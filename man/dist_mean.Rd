@@ -2,22 +2,23 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{dist_mean}
 \alias{dist_mean}
-\title{Find mean of a probability distribution function}
+\title{Find mean of a probability density function}
 \usage{
-dist_mean(dist, l = 0, r = 1)
+dist_mean(dist, l = attr(dist, "limits")[1], r = attr(dist,
+  "limits")[2])
 }
 \arguments{
-\item{dist}{A one-argument function}
+\item{dist}{A one-argument function returned from \code{\link[=update_prior]{update_prior()}}}
 
-\item{l}{Minimum value}
+\item{l}{Lower bound of the density's support}
 
-\item{r}{Maximum value}
+\item{r}{Upper bound of the density's support}
 }
 \value{
 A scalar
 }
 \description{
-Find mean of a probability distribution function
+Find mean of a probability density function
 }
 \examples{
 

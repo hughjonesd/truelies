@@ -10,6 +10,16 @@ Implements Bayesian methods, described in Hugh-Jones (2019), for estimating
     the proportion of liars in coinflip-style experiments, where subjects report
     a random outcome and are paid for reporting a "good" outcome.
 }
+\section{Testing the package}{
+
+
+To run tests on the package:\preformatted{source(system.file("test-statistics.R", package = "truelies"))
+}
+
+This will take some time and will produce a data frame of test results
+for different parameter values.
+}
+
 \references{
 Hugh-Jones, David (2019). True Lies: Comment on Garbarino,
 Slonim and Villeval (2018). Journal of the Economic Science Association.

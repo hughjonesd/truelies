@@ -32,6 +32,16 @@
 #' ```
 #' power_calc(N = 100, P = 0.5, lambda = 0.2)
 #' ```
+#' @section Testing the package:
+#'
+#' To run tests on the package:
+#'
+#' ```
+#' source(system.file("test-statistics.R", package = "truelies"))
+#' ```
+#'
+#' This will take some time and will produce a data frame of test results
+#' for different parameter values.
 #'
 #' @references Hugh-Jones, David (2019). True Lies: Comment on Garbarino,
 #'   Slonim and Villeval (2018). Journal of the Economic Science Association.

@@ -14,3 +14,9 @@ Imports:
     hdrcde
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Suggests: 
+    dplyr,
+    ggplot2,
+    purrr,
+    tidyr
+    
