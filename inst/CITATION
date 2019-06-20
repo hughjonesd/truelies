@@ -1,0 +1,18 @@
+citHeader("To cite truelies in publications use:")
+
+citEntry(entry = "Article",
+  title        = "True Lies: Comment on Garbarino, Slonim and Villeval (2018)",
+  author       = personList(as.person("David Hugh-Jones")),
+  journal      = "Journal of the Economic Science Association",
+  year         = "2019",
+  volume       = "55",
+  number       = "8",
+  pages        = "1--24",
+  url          = "http://www.jstatsoft.org/v55/i08/",
+
+  textVersion  =
+  paste("David Hugh_Jones (2019).",
+        "True Lies: Comment on Garbarino, Slonim and Villeval (2018)",
+        "Journal of the Economic Science Association",
+        "URL: ")
+)
