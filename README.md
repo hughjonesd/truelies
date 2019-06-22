@@ -3,6 +3,11 @@
 
 # truelies
 
+[![Travis build
+status](https://travis-ci.org/hughjonesd/truelies.svg?branch=master)](https://travis-ci.org/hughjonesd/truelies)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/hughjonesd/truelies?branch=master&svg=true)](https://ci.appveyor.com/project/hughjonesd/truelies)
+
 `truelies` implements Bayesian methods, described in [Hugh-Jones
 (2019)](https://link.springer.com/article/10.1007/s40881-019-00069-x),
 for estimating the proportion of liars in coinflip-style experiments,

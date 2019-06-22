@@ -2,7 +2,7 @@ Package: truelies
 Type: Package
 Title: Bayesian Methods to Estimate the Proportion of Liars in Coinflip Experiments
 Version: 0.1.0
-Author: Who wrote it
+Author: David Hugh-Jones <davidhughjones@gmail.com>
 Maintainer: David Hugh-Jones <davidhughjones@gmail.com>
 Description: Implements Bayesian methods, described in Hugh-Jones (2019), for estimating
     the proportion of liars in coinflip-style experiments, where subjects report
