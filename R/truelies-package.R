@@ -1,8 +1,7 @@
 #' @keywords internal
 #' @author David Hugh-Jones
 #'
-#' Distributions are represented by their density functions, which are
-#' one-argument R functions.
+#' @section Usage:
 #'
 #' To estimate the proportion of liars in an experiment, use [update_prior()]
 #' followed by [dist_mean()]:
@@ -32,6 +31,13 @@
 #' ```
 #' power_calc(N = 100, P = 0.5, lambda = 0.2)
 #' ```
+#'
+#' To test power for detecting differences between groups, use [power_calc_difference()]:
+#'
+#' ```
+#' power_calc_difference(N1 = 100, P = 5/6, lambda1 = 0.1, lambda2 = 0.25)
+#' ```
+#'
 #' @section Testing the package:
 #'
 #' To run tests on the package:
@@ -39,9 +45,10 @@
 #' ```
 #' source(system.file("test-statistics.R", package = "truelies"))
 #' ```
+#' You will need \pkg{dplyr}, \pkg{purrr}, \pkg{tidyr} and \pkg{ggplot2} installed.
 #'
-#' This will take some time and will produce a data frame of test results
-#' for different parameter values.
+#' This will take some time and will produce data frames of test results
+#' for different parameter values, along with some plots.
 #'
 #' @references Hugh-Jones, David (2019). True Lies: Comment on Garbarino,
 #'   Slonim and Villeval (2018). Journal of the Economic Science Association.

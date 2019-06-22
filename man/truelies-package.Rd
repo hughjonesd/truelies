@@ -10,26 +10,8 @@ Implements Bayesian methods, described in Hugh-Jones (2019), for estimating
     the proportion of liars in coinflip-style experiments, where subjects report
     a random outcome and are paid for reporting a "good" outcome.
 }
-\section{Testing the package}{
+\section{Usage}{
 
-
-To run tests on the package:\preformatted{source(system.file("test-statistics.R", package = "truelies"))
-}
-
-This will take some time and will produce a data frame of test results
-for different parameter values.
-}
-
-\references{
-Hugh-Jones, David (2019). True Lies: Comment on Garbarino,
-Slonim and Villeval (2018). Journal of the Economic Science Association.
-https://link.springer.com/article/10.1007/s40881-019-00069-x.
-}
-\author{
-David Hugh-Jones
-
-Distributions are represented by their density functions, which are
-one-argument R functions.
 
 To estimate the proportion of liars in an experiment, use \code{\link[=update_prior]{update_prior()}}
 followed by \code{\link[=dist_mean]{dist_mean()}}:\preformatted{posterior <- update_prior(heads = 33, N = 50, P = 0.5, prior = dunif)
@@ -47,5 +29,29 @@ dist_hdr(dd, 0.95, bounds = c(-1, 1))
 
 To test power for detecting a given proportion of liars, use \code{\link[=power_calc]{power_calc()}}:\preformatted{power_calc(N = 100, P = 0.5, lambda = 0.2)
 }
+
+To test power for detecting differences between groups, use \code{\link[=power_calc_difference]{power_calc_difference()}}:\preformatted{power_calc_difference(N1 = 100, P = 5/6, lambda1 = 0.1, lambda2 = 0.25)
+}
+}
+
+\section{Testing the package}{
+
+
+To run tests on the package:\preformatted{source(system.file("test-statistics.R", package = "truelies"))
+}
+
+You will need \pkg{dplyr}, \pkg{purrr}, \pkg{tidyr} and \pkg{ggplot2} installed.
+
+This will take some time and will produce data frames of test results
+for different parameter values, along with some plots.
+}
+
+\references{
+Hugh-Jones, David (2019). True Lies: Comment on Garbarino,
+Slonim and Villeval (2018). Journal of the Economic Science Association.
+https://link.springer.com/article/10.1007/s40881-019-00069-x.
+}
+\author{
+David Hugh-Jones
 }
 \keyword{internal}
