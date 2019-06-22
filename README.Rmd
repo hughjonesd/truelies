@@ -44,3 +44,13 @@ dist_mean(d1)
 # 95% confidence interval, using hdrcde
 dist_hdr(d1, 0.95)
 ```
+
+## Citation
+
+`r format(citation("truelies"), style = "text")`
+
+## Bibtex 
+
+```{r, echo = FALSE, comment = NA}
+print(citation("truelies"), style = "Bibtex")
+```

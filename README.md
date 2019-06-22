@@ -44,3 +44,22 @@ dist_mean(d1)
 dist_hdr(d1, 0.95)
 #> [1] 0.060000 0.551066
 ```
+
+## Citation
+
+Hugh-Jones D (2019). “True Lies: Comment on Garbarino, Slonim and
+Villeval (2018).” *Journal of the Economic Science Association*. doi:
+10.1007/s40881-019-00069-x (URL:
+<http://doi.org/10.1007/s40881-019-00069-x>), \<URL:
+<https://link.springer.com/article/10.1007/s40881-019-00069-x>\>.
+
+## Bibtex
+
+    @Article{,
+      title = {True Lies: Comment on Garbarino, Slonim and Villeval (2018)},
+      author = {David Hugh-Jones},
+      journal = {Journal of the Economic Science Association},
+      year = {2019},
+      url = {https://link.springer.com/article/10.1007/s40881-019-00069-x},
+      doi = {10.1007/s40881-019-00069-x},
+    }

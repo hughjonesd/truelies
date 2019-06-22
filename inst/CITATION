@@ -5,14 +5,11 @@ citEntry(entry = "Article",
   author       = personList(as.person("David Hugh-Jones")),
   journal      = "Journal of the Economic Science Association",
   year         = "2019",
-  volume       = "55",
-  number       = "8",
-  pages        = "1--24",
-  url          = "http://www.jstatsoft.org/v55/i08/",
-
+  url          = "https://link.springer.com/article/10.1007/s40881-019-00069-x",
+  doi          = "10.1007/s40881-019-00069-x",
   textVersion  =
   paste("David Hugh_Jones (2019).",
-        "True Lies: Comment on Garbarino, Slonim and Villeval (2018)",
-        "Journal of the Economic Science Association",
-        "URL: ")
+        "True Lies: Comment on Garbarino, Slonim and Villeval (2018).",
+        "Journal of the Economic Science Association.",
+        "https://doi.org/10.1007/s40881-019-00069-x")
 )
