@@ -4,10 +4,10 @@
 \name{truelies-package}
 \alias{truelies}
 \alias{truelies-package}
-\title{truelies: Bayesian Methods to Estimate the Proportion of Liars in Coinflip Experiments}
+\title{truelies: Bayesian Methods to Estimate the Proportion of Liars in Coin Flip Experiments}
 \description{
 Implements Bayesian methods, described in Hugh-Jones (2019), for estimating
-    the proportion of liars in coinflip-style experiments, where subjects report
+    the proportion of liars in coin flip-style experiments, where subjects report
     a random outcome and are paid for reporting a "good" outcome.
 }
 \section{Usage}{
