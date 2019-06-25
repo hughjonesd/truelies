@@ -30,6 +30,8 @@ prob_report_given_lambda <- function (lambda, heads, N, P) {
 }
 
 
+is_prob <- function (p) all(p >= 0 & p <= 1)
+
 
 try_integral <- function(f, a, b, npoints = 100) {
   integ <- stats::integrate(f, a, b, subdivisions = npoints) # numerical integration
@@ -37,6 +39,7 @@ try_integral <- function(f, a, b, npoints = 100) {
 
   return(integ$value)
 }
+
 
 #' Calculate posterior distribution of the proportion of liars
 #'
@@ -353,7 +356,63 @@ power_calc_difference <- function(N1, N2 = N1, P, lambda1, lambda2, alpha = 0.05
         )
 }
 
-is_prob <- function (p) all(p >= 0 & p <= 1)
+
+#' Estimate proportions of liars in multiple samples using empirical Bayes
+#'
+#' This function creates a prior by fitting a Beta distribution to the `heads/N` vector,
+#' using [MASS::fitdistr()]. The prior is then updated using data from each
+#' individual sample to give the posterior distributions.
+#'
+#' @param heads A vector of numbers of the good outcome reported
+#' @param N A vector of sample sizes
+#' @inherit basic_params params
+#'
+#' @return A list with two components:
+#'
+#' * `prior`, the calculated empirical prior (of class `densityFunction`).
+#' * `posterior`, a list of posterior distributions (objects of class `densityFunction`).
+#'   If `heads` was named, the list will have the same names.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' heads <- c(Baseline = 30, Treatment1 = 38, Treatment2 = 45)
+#' N <- c(50, 52, 57)
+#' res <- empirical_bayes(heads, N, P = 0.5)
+#'
+#' compare_dists(res$posteriors$Baseline, res$posteriors$Treatment1)
+#' plot(res$prior, ylim = c(0, 4), col = "grey", lty = 2)
+#' plot(res$posteriors$Baseline, add = TRUE, col = "blue")
+#' plot(res$posteriors$Treatment1, add = TRUE, col = "orange")
+#' plot(res$posteriors$Treatment2, add = TRUE, col = "red")
+#'
+empirical_bayes <- function (heads, N, P) {
+  if (! requireNamespace("MASS", quietly = TRUE)) {
+    stop("`empirical_bayes` requires the 'MASS' package. ",
+      "You can install it by running:\n",
+      "  install.packages(\"MASS\")")
+  }
+
+  maxlik_ests <- pmax(0, (heads/N - P)/(1 - P))
+  params <- MASS::fitdistr(maxlik_ests, dbeta, list(shape1 = 1, shape2 = 1))
+  prior <- function (x) dbeta(
+          x,
+          shape1 = params$estimate[["shape1"]],
+          shape2 = params$estimate[["shape2"]]
+        )
+
+  result <- list()
+  result$prior <- prior
+  attr(result$prior, "limits") <- c(0, 1)
+  class(result$prior) <- c("densityFunction", "function")
+  result$posteriors <- mapply(update_prior, heads = heads, N = N,
+          MoreArgs = list(P = P, prior = prior),
+          SIMPLIFY = FALSE, USE.NAMES = TRUE
+        )
+
+  return(result)
+}
 
 
 #' Print/plot an object of class `densityFunction`.
