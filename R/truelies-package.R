@@ -38,6 +38,15 @@
 #' power_calc_difference(N1 = 100, P = 5/6, lambda1 = 0.1, lambda2 = 0.25)
 #' ```
 #'
+#' To compare different samples by empirical Bayes estimation, use
+#' [empirical_bayes()]:
+#'
+#' ```
+#' heads <- c(Baseline = 30, Treatment1 = 38, Treatment2 = 45)
+#' N <- c(50, 52, 57)
+#' result <- empirical_bayes(heads, N, P = 0.5)
+#' ```
+#'
 #' @section Testing the package:
 #'
 #' To run tests on the package:
