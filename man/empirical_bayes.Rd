@@ -8,12 +8,14 @@
 \usage{
 empirical_bayes(heads, ...)
 
-\method{empirical_bayes}{default}(heads, N, P)
+\method{empirical_bayes}{default}(heads, N, P, ...)
 
-\method{empirical_bayes}{formula}(formula, data, P, subset)
+\method{empirical_bayes}{formula}(formula, data, P, subset, ...)
 }
 \arguments{
 \item{heads}{A vector of numbers of the good outcome reported}
+
+\item{...}{Ignored}
 
 \item{N}{A vector of sample sizes}
 

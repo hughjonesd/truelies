@@ -365,6 +365,7 @@ power_calc_difference <- function(N1, N2 = N1, P, lambda1, lambda2, alpha = 0.05
 #'
 #' @param heads A vector of numbers of the good outcome reported
 #' @param N A vector of sample sizes
+#' @param ... Ignored
 #' @inherit basic_params params
 #'
 #' @return A list with two components:
@@ -392,7 +393,7 @@ empirical_bayes <- function (heads, ...) UseMethod("empirical_bayes")
 
 #' @name empirical_bayes
 #' @export
-empirical_bayes.default <- function (heads, N, P) {
+empirical_bayes.default <- function (heads, N, P, ...) {
   if (! requireNamespace("MASS", quietly = TRUE)) {
     stop("`empirical_bayes` requires the 'MASS' package. ",
       "You can install it by running:\n",
@@ -400,8 +401,8 @@ empirical_bayes.default <- function (heads, N, P) {
   }
 
   maxlik_ests <- pmax(0, (heads/N - P)/(1 - P))
-  params <- MASS::fitdistr(maxlik_ests, dbeta, list(shape1 = 1, shape2 = 1))
-  prior <- function (x) dbeta(
+  params <- MASS::fitdistr(maxlik_ests, stats::dbeta, list(shape1 = 1, shape2 = 1))
+  prior <- function (x) stats::dbeta(
           x,
           shape1 = params$estimate[["shape1"]],
           shape2 = params$estimate[["shape2"]]
@@ -445,7 +446,7 @@ empirical_bayes.default <- function (heads, N, P) {
 #'         group = rep(LETTERS[1:10], each = 30)
 #'     )
 #' empirical_bayes(I(report == "heads") ~ group, data = raw_data, P = 0.5)
-empirical_bayes.formula <- function (formula, data, P, subset) {
+empirical_bayes.formula <- function (formula, data, P, subset, ...) {
   m <- match.call(expand.dots = FALSE)
   if (is.matrix(eval(m$data, parent.frame()))) m$data <- as.data.frame(data)
   m[[1L]] <- quote(stats::model.frame)
