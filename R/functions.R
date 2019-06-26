@@ -8,7 +8,8 @@
 #' @param N Total number in sample
 #' @param P Probability of *bad* outcome
 #' @param prior Prior over lambda. A function which takes a vector of values
-#'   between 0 and 1, and returns the probability density.
+#'   between 0 and 1, and returns the probability density. The default is
+#'   the uniform distribution.
 #'
 #' @name basic_params
 NULL
@@ -69,7 +70,7 @@ try_integral <- function(f, a, b, npoints = 100) {
 #' posterior <- update_prior(heads = 30, N = 50, P = 0.5, prior = stats::dunif)
 #' plot(posterior)
 #' @export
-update_prior <- function(heads, N, P, prior, npoints = 1e3) {
+update_prior <- function(heads, N, P, prior = stats::dunif, npoints = 1e3) {
   stopifnot(heads <= N, heads >= 0, is_prob(P), is.function(prior))
 
   f <- function (lprime) prior(lprime) * prob_report_given_lambda(lprime, heads, N, P)

@@ -17,7 +17,8 @@ power_calc(N, P, lambda, alpha = 0.05, prior = stats::dunif,
 \item{alpha}{Significance level to use for the null hypothesis}
 
 \item{prior}{Prior over lambda. A function which takes a vector of values
-between 0 and 1, and returns the probability density.}
+between 0 and 1, and returns the probability density. The default is
+the uniform distribution.}
 
 \item{nsims}{Number of simulations to run}
 }

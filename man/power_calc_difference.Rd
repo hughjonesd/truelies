@@ -25,7 +25,8 @@ power_calc_difference(N1, N2 = N1, P, lambda1, lambda2, alpha = 0.05,
 abbreviated}
 
 \item{prior}{Prior over lambda. A function which takes a vector of values
-between 0 and 1, and returns the probability density.}
+between 0 and 1, and returns the probability density. The default is
+the uniform distribution.}
 
 \item{nsims}{Number of simulations to run}
 }

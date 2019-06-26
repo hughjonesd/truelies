@@ -4,7 +4,7 @@
 \alias{update_prior}
 \title{Calculate posterior distribution of the proportion of liars}
 \usage{
-update_prior(heads, N, P, prior, npoints = 1000)
+update_prior(heads, N, P, prior = stats::dunif, npoints = 1000)
 }
 \arguments{
 \item{heads}{Number of good outcomes reported}
@@ -14,7 +14,8 @@ update_prior(heads, N, P, prior, npoints = 1000)
 \item{P}{Probability of \emph{bad} outcome}
 
 \item{prior}{Prior over lambda. A function which takes a vector of values
-between 0 and 1, and returns the probability density.}
+between 0 and 1, and returns the probability density. The default is
+the uniform distribution.}
 
 \item{npoints}{How many points to integrate on?}
 }
