@@ -2,9 +2,15 @@
 % Please edit documentation in R/bayesian-heads-cts.R
 \name{empirical_bayes}
 \alias{empirical_bayes}
+\alias{empirical_bayes.default}
+\alias{empirical_bayes.formula}
 \title{Estimate proportions of liars in multiple samples using empirical Bayes}
 \usage{
-empirical_bayes(heads, N, P)
+empirical_bayes(heads, ...)
+
+\method{empirical_bayes}{default}(heads, N, P)
+
+\method{empirical_bayes}{formula}(formula, data, P, subset)
 }
 \arguments{
 \item{heads}{A vector of numbers of the good outcome reported}
@@ -12,6 +18,14 @@ empirical_bayes(heads, N, P)
 \item{N}{A vector of sample sizes}
 
 \item{P}{Probability of \emph{bad} outcome}
+
+\item{formula}{A two-sided formula of the form \code{heads ~ group}. \code{heads} is
+a logical vector  specifying whether the "good" outcome was reported. \code{group}
+specifies the sample.}
+
+\item{data}{A data frame or matrix. Each row represents one individual.}
+
+\item{subset}{A logical or numeric vector specifying the subset of data to use}
 }
 \value{
 A list with two components:
@@ -26,6 +40,9 @@ This function creates a prior by fitting a Beta distribution to the \code{heads/
 using \code{\link[MASS:fitdistr]{MASS::fitdistr()}}. The prior is then updated using data from each
 individual sample to give the posterior distributions.
 }
+\details{
+The formula interface allows calling the function directly on experimental data.
+}
 \examples{
 
 heads <- c(Baseline = 30, Treatment1 = 38, Treatment2 = 45)
@@ -38,4 +55,15 @@ plot(res$posteriors$Baseline, add = TRUE, col = "blue")
 plot(res$posteriors$Treatment1, add = TRUE, col = "orange")
 plot(res$posteriors$Treatment2, add = TRUE, col = "red")
 
+
+# starting from raw data:
+raw_data <- data.frame(
+        report = sample(c("heads", "tails"),
+          size = 300,
+          replace = TRUE,
+          prob = c(.8, .2)
+        ),
+        group = rep(LETTERS[1:10], each = 30)
+    )
+empirical_bayes(I(report == "heads") ~ group, data = raw_data, P = 0.5)
 }

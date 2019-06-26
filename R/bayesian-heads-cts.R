@@ -387,7 +387,12 @@ power_calc_difference <- function(N1, N2 = N1, P, lambda1, lambda2, alpha = 0.05
 #' plot(res$posteriors$Treatment1, add = TRUE, col = "orange")
 #' plot(res$posteriors$Treatment2, add = TRUE, col = "red")
 #'
-empirical_bayes <- function (heads, N, P) {
+empirical_bayes <- function (heads, ...) UseMethod("empirical_bayes")
+
+
+#' @name empirical_bayes
+#' @export
+empirical_bayes.default <- function (heads, N, P) {
   if (! requireNamespace("MASS", quietly = TRUE)) {
     stop("`empirical_bayes` requires the 'MASS' package. ",
       "You can install it by running:\n",
@@ -412,6 +417,45 @@ empirical_bayes <- function (heads, N, P) {
         )
 
   return(result)
+}
+
+
+#' @name empirical_bayes
+#'
+#' @details
+#' The formula interface allows calling the function directly on experimental data.
+#'
+#' @param formula A two-sided formula of the form `heads ~ group`. `heads` is
+#'   a logical vector  specifying whether the "good" outcome was reported. `group`
+#'   specifies the sample.
+#' @param data A data frame or matrix. Each row represents one individual.
+#' @param subset A logical or numeric vector specifying the subset of data to use
+#'
+#' @export
+#'
+#' @examples
+#'
+#' # starting from raw data:
+#' raw_data <- data.frame(
+#'         report = sample(c("heads", "tails"),
+#'           size = 300,
+#'           replace = TRUE,
+#'           prob = c(.8, .2)
+#'         ),
+#'         group = rep(LETTERS[1:10], each = 30)
+#'     )
+#' empirical_bayes(I(report == "heads") ~ group, data = raw_data, P = 0.5)
+empirical_bayes.formula <- function (formula, data, P, subset) {
+  m <- match.call(expand.dots = FALSE)
+  if (is.matrix(eval(m$data, parent.frame()))) m$data <- as.data.frame(data)
+  m[[1L]] <- quote(stats::model.frame)
+  m$P <- NULL
+  mf <- eval(m, parent.frame())
+  stopifnot(is.logical(mf[[1]]))
+  if (is.factor(mf[[2]])) mf[[2]] <- droplevels(mf[[2]])
+  heads <- tapply(mf[[1]], mf[[2]], sum)
+  N <- tapply(mf[[1]], mf[[2]], length)
+  empirical_bayes(heads = heads, N = N, P = P)
 }
 
 
