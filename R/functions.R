@@ -490,5 +490,6 @@ print.densityFunction <- function (x, ...) {
 #' @rdname print.densityFunction
 plot.densityFunction <- function (x, ...) {
   # ... goes first so we can override xlim or ylab
-  NextMethod(..., xlim = attr(x, "limits"), ylab = "Density")
+  NextMethod(..., xlim = attr(x, "limits"), ylab = "Density",
+        xlab = expression(lambda))
 }
