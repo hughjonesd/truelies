@@ -3,6 +3,8 @@
 
 # truelies
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/truelies)](https://cran.r-project.org/package=truelies)
 [![Travis build
 status](https://travis-ci.org/hughjonesd/truelies.svg?branch=master)](https://travis-ci.org/hughjonesd/truelies)
 [![AppVeyor build
@@ -20,7 +22,11 @@ For R source for the original paper, see
 ## Installation
 
 ``` r
-devtools::install_github("hughjonesd/truelies")
+# stable version on CRAN
+install.packages("truelies")
+
+# latest version from github
+remotes::install_github("hughjonesd/truelies")
 ```
 
 ## Example
