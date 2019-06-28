@@ -57,5 +57,7 @@ dist_hdr(d1, 0.95)
 ## Bibtex 
 
 ```{r, echo = FALSE, comment = NA}
-print(citation("truelies"), style = "Bibtex")
+cit <- citation("truelies")
+cit$key <- "hughjones2019"
+print(cit, style = "Bibtex")
 ```
