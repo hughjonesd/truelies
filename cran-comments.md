@@ -5,7 +5,8 @@
 * local OS X install, R 3.6.1
 * ubuntu 14.04 (on travis-ci), R 3.5.2
 * windows (on appveyor)
-* win-builder (devel and release)
+* win-builder (devel)
+* rhub (windows, Fedora, Ubuntu)
 
 ## R CMD check results
 
