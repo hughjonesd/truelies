@@ -4,12 +4,13 @@
 \name{truelies-package}
 \alias{truelies}
 \alias{truelies-package}
-\title{truelies: Bayesian Methods to Estimate the Proportion of Liars in Coin Flip Experiments}
+\title{truelies: Bayesian Methods to Estimate the Proportion of Liars in
+    Coin Flip Experiments}
 \description{
-Implements Bayesian methods, described in Hugh-Jones (2019)  
-    <doi:10.1007/s40881-019-00069-x>, for estimating
-    the proportion of liars in coin flip-style experiments, where subjects report
-    a random outcome and are paid for reporting a "good" outcome.
+Implements Bayesian methods, described in
+    Hugh-Jones (2019) <doi:10.1007/s40881-019-00069-x>, for estimating the
+    proportion of liars in coin flip-style experiments, where subjects
+    report a random outcome and are paid for reporting a "good" outcome.
 }
 \section{Usage}{
 
@@ -57,6 +58,14 @@ for different parameter values, along with some plots.
 Hugh-Jones, David (2019). True Lies: Comment on Garbarino,
 Slonim and Villeval (2018). Journal of the Economic Science Association.
 https://link.springer.com/article/10.1007/s40881-019-00069-x.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/hughjonesd/truelies}
+  \item Report bugs at \url{https://github.com/hughjonesd/truelies/issues}
+}
+
 }
 \author{
 David Hugh-Jones
