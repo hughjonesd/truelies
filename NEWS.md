@@ -1,4 +1,4 @@
-# truelies 0.1.0.9000
+# truelies 0.2.0
 
 * Added `empirical_bayes()` function.
 * `update_prior()` now uses `stats::dunif` as the prior by default.
