@@ -5,8 +5,6 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/truelies)](https://cran.r-project.org/package=truelies)
-[![Travis build
-status](https://travis-ci.org/hughjonesd/truelies.svg?branch=master)](https://travis-ci.org/hughjonesd/truelies)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/hughjonesd/truelies?branch=master&svg=true)](https://ci.appveyor.com/project/hughjonesd/truelies)
 
@@ -42,13 +40,12 @@ plot(d1)
 <img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
-
 dist_mean(d1)
 #> [1] 0.3120336
 
 # 95% confidence interval, using hdrcde
 dist_hdr(d1, 0.95)
-#> [1] 0.06123949 0.55000000
+#> [1] 0.06122615 0.55000081
 ```
 
 ## Citation
@@ -56,8 +53,8 @@ dist_hdr(d1, 0.95)
 Hugh-Jones D (2019). “True Lies: Comment on Garbarino, Slonim and
 Villeval (2018).” *Journal of the Economic Science Association*. doi:
 10.1007/s40881-019-00069-x (URL:
-<http://doi.org/10.1007/s40881-019-00069-x>), \<URL:
-<https://link.springer.com/article/10.1007/s40881-019-00069-x>\>.
+<https://doi.org/10.1007/s40881-019-00069-x>), &lt;URL:
+<https://link.springer.com/article/10.1007/s40881-019-00069-x>&gt;.
 
 ## Bibtex
 

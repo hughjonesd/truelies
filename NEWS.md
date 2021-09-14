@@ -1,3 +1,9 @@
+
+# truelies development version
+
+* Updates for R CMD check
+* Remove travis
+
 # truelies 0.2.0
 
 * Added `empirical_bayes()` function.

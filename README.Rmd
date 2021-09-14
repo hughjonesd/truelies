@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
 # truelies
 
  [![CRAN status](https://www.r-pkg.org/badges/version/truelies)](https://cran.r-project.org/package=truelies)
-[![Travis build status](https://travis-ci.org/hughjonesd/truelies.svg?branch=master)](https://travis-ci.org/hughjonesd/truelies)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/hughjonesd/truelies?branch=master&svg=true)](https://ci.appveyor.com/project/hughjonesd/truelies)
 
 `truelies` implements Bayesian methods, described in 
